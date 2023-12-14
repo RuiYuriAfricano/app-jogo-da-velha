@@ -46,7 +46,7 @@ function updateScore() {
 
 function activeIA() {
     IA = !IA;
-    IA ? btnIA.innerHTML = "MAQUINA: ON" : btnIA.innerHTML = "MAQUINA: OFF";
+    IA ? btnIA.innerHTML = "MÁQUINA: ATIVADA" : btnIA.innerHTML = "MÁQUINA: DESATIVADA";
 
 }
 
@@ -96,7 +96,7 @@ const marcar = (e) => {
 
         if (isWinner()) { // Verifica se há vitória
 
-            statusGame.innerHTML = `'${PLAYER_TIME}' WINNER`
+            statusGame.innerHTML = `'${PLAYER_TIME}' GANHOU!`
             switch (PLAYER_TIME) {
                 case 'X':
                     scoreboard[0]++;
