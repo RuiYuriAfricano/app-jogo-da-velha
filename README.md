@@ -41,7 +41,7 @@ OBS: Caso IA veja que há tanto a possibilidade do Jogador 'X' vencer quanto de 
 - Html
 - Css
 - Javascript
-- IA nativo do Javascrit
+- IA nativo do Javascript
 
 # Others 
 
