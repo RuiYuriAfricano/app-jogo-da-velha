@@ -1,4 +1,4 @@
-# app-jogo-da-velha
+# App-jogo-da-velha
 
 Aplicação do conhecimento de IA no projeto do jogo da velha, uma avaliação da cadeira de Inteligência Artificial.
 
