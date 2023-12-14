@@ -27,7 +27,7 @@ OBS: Caso IA veja que há tanto a possibilidade do Jogador 'X' vencer quanto de 
 
 - Jogar humano com humano
 - Jogar humano com computador
-- Reiniar o jogo, depois de terminar
+- Reiniciar o jogo, depois de terminar
 - Visualização do Scored
 
 # Stack
