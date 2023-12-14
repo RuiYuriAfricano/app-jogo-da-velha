@@ -8,9 +8,9 @@ Aplicação do conhecimento de IA no projecto jogo da velha, avaliação da cade
 
 'X' sempre inicia o game. Após a primeira jogada, o turno é invertido e então é a vez da 'BOLINHA' jogar. Somente depois de realizar uma jogada válida o sistema analisa se houve uma vitória, caso não tenha, inverte o turno e segue o jogo até alguém ganhar ou dar EMPATE!
 
-<img alt="jogo-vitoria.png" src="https://github.com/RuiYuriAfricano/app-jogo-da-velha/tree/main/images/jogo-vitoria.png?raw=true" data-hpc="true" class="Box-sc-g0xbh4-0 kzRgrI" width="400" height="400">
+![Jogo Vitória](https://github.com/RuiYuriAfricano/app-jogo-da-velha/raw/main/images/jogo-vitoria.png)
 
-<img alt="jogo-empate.png" src="https://github.com/RuiYuriAfricano/app-jogo-da-velha/tree/main/images/jogo-empate.png?raw=true" data-hpc="true" class="Box-sc-g0xbh4-0 kzRgrI" width="400" height="400">
+![Jogo Empate](https://github.com/RuiYuriAfricano/app-jogo-da-velha/raw/main/images/jogo-empate.png)
 
 # GANHOU ou EMPATE
 
