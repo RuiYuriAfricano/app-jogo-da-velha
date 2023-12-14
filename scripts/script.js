@@ -1,13 +1,13 @@
-var PLAYER_TIME;
-var scoreboard = [0, 0, 0] //score: [0] WINS; [1] LOSS; [2] DRAW
+var JOGADOR_ATUAL;
+var placar = [0, 0, 0]; // placar: [0] VITÓRIAS; [1] DERROTAS; [2] EMPATES
 var IA = false;
-var playsPossible;
-var marks;
+var jogadasPossiveis;
+var celulasMarcadas;
 var btnIA = document.getElementById("buttonIA");
-var restartBtn = document.getElementById('button');
+var btnReiniciar = document.getElementById('button');
 const casas = document.querySelectorAll('.casa');
-var statusGame = document.getElementById("resultado");
-const WINS_POSSIBLE = [
+var estadoDoJogo = document.getElementById("resultado");
+const POSSIBILIDADE_VENCER = [
     [1, 2, 3],
     [4, 5, 6],
     [7, 8, 9],
@@ -18,232 +18,184 @@ const WINS_POSSIBLE = [
     [3, 6, 9]
 ];
 
-
-function init() {
-
-    btnRestart()
-    PLAYER_TIME = 'X';
-    marks = [];
-    playsPossible = WINS_POSSIBLE
+function iniciar() {
+    botaoReiniciar();
+    JOGADOR_ATUAL = 'X';
+    celulasMarcadas = [];
+    jogadasPossiveis = POSSIBILIDADE_VENCER;
     casas.forEach((item, index) => {
-        //console.log(index,item)
-        item.addEventListener('click', marcar)
-
-    })
-
-    btnIA.addEventListener("click", activeIA);
-
-
+        item.addEventListener('click', marcar);
+    });
+    btnIA.addEventListener("click", ativarIA);
 }
 
-function updateScore() {
-    let score = document.querySelector('.scoreboard').querySelectorAll('div')
-    score.forEach((element, index) => {
-        element.innerHTML = scoreboard[index];
-    })
-
+function atualizarPlacar() {
+    let placarElements = document.querySelector('.scoreboard').querySelectorAll('div');
+    placarElements.forEach((element, index) => {
+        element.innerHTML = placar[index];
+    });
 }
 
-function activeIA() {
+function ativarIA() {
     IA = !IA;
     IA ? btnIA.innerHTML = "MÁQUINA: ATIVADA" : btnIA.innerHTML = "MÁQUINA: DESATIVADA";
-
 }
 
-function btnRestart(hide = false) {
-
-    if (hide) return restartBtn.style = "display:inline-block;";
-    restartBtn.style = "display:none;"
-    restartBtn.addEventListener('click', restartGame, { once: true });
-
+function botaoReiniciar(hide = false) {
+    if (hide) return btnReiniciar.style.display = "inline-block";
+    btnReiniciar.style.display = "none";
+    btnReiniciar.addEventListener('click', reiniciarJogo, { once: true });
 }
 
-function changePlayer() {
-
-    PLAYER_TIME === 'X' ? PLAYER_TIME = 'O' : PLAYER_TIME = 'X';
-
+function trocarJogador() {
+    JOGADOR_ATUAL === 'X' ? JOGADOR_ATUAL = 'O' : JOGADOR_ATUAL = 'X';
 }
 
-function validPlay(local) {
-
-    return (local.innerHTML == '')
+function jogadaValida(local) {
+    return local.innerHTML == '';
 }
 
-function cellElement(id) {
-
-    if (casas[id - 1].innerHTML != "") return casas[id - 1].innerHTML
-
+function celulaMarcada(id) {
+    if (casas[id - 1].innerHTML != "") return casas[id - 1].innerHTML;
 }
 
-function setCellElement(id) {
-    casas[id - 1].click()
-
+function marcarCelula(id) {
+    casas[id - 1].click();
 }
 
-function endGame() {
-
+function terminarJogo() {
     casas.forEach((item, index) => {
-        item.removeEventListener("click", marcar)
-    })
-
+        item.removeEventListener("click", marcar);
+    });
 }
 
 const marcar = (e) => {
-    if (validPlay(e.target)) { // VERIFICA SE É JOGADA VALIDA
+    if (jogadaValida(e.target)) {
+        e.target.innerHTML = JOGADOR_ATUAL;
+        celulasMarcadas.push(e.target.innerHTML);
 
-        e.target.innerHTML = PLAYER_TIME
-        marks.push(e.target.innerHTML)
-
-        if (isWinner()) { // Verifica se há vitória
-
-            statusGame.innerHTML = `'${PLAYER_TIME}' GANHOU!`
-            switch (PLAYER_TIME) {
+        if (isVencedor()) {
+            estadoDoJogo.innerHTML = `'${JOGADOR_ATUAL}' GANHOU!`;
+            switch (JOGADOR_ATUAL) {
                 case 'X':
-                    scoreboard[0]++;
+                    placar[0]++;
                     break;
                 case 'O':
-                    scoreboard[1]++;
+                    placar[1]++;
                     break;
             }
-            updateScore()
-            endGame();
-            btnRestart(true)
-
+            atualizarPlacar();
+            terminarJogo();
+            botaoReiniciar(true);
         } else {
-
-            if (isDraw()) {
-                // Jogo empatou
-                scoreboard[2]++;
-                updateScore()
-                statusGame.innerHTML = "EMPATE!";
-                btnRestart(true)
-
+            if (isEmpate()) {
+                placar[2]++;
+                atualizarPlacar();
+                estadoDoJogo.innerHTML = "EMPATE!";
+                botaoReiniciar(true);
             } else {
-                // Jogo continua (Sem empate, sem Vitoria e jogadas disponiveis ainda.
-                changePlayer();
-                if (PLAYER_TIME == "O" && IA) IAcheck();
-
+                trocarJogador();
+                if (JOGADOR_ATUAL == "O" && IA) verificarIA();
             }
-
         }
-
-    } else { // EVITA JOGADA INDEVIDA
-
-        alert("Jogada indevida!")
-
+    } else {
+        alert("Jogada indevida!");
     }
+};
 
+function isEmpate() {
+    return celulasMarcadas.length == 9;
 }
 
-function isDraw() {
-
-    return (marks.length == 9);
-
-}
-
-function isWinner() {
-
-    return WINS_POSSIBLE.some((combination) => {
+function isVencedor() {
+    return POSSIBILIDADE_VENCER.some((combination) => {
         return combination.every((id) => {
-            return (cellElement(id) == PLAYER_TIME)
-        })
-    })
-
+            return celulaMarcada(id) == JOGADOR_ATUAL;
+        });
+    });
 }
 
-const restartGame = (e) => {
-
-    init();
+const reiniciarJogo = (e) => {
+    iniciar();
     casas.forEach((casa) => {
         casa.innerHTML = "";
-    })
-    statusGame.innerHTML = "JOGO DA VELHA"
+    });
+    estadoDoJogo.innerHTML = "JOGO DA VELHA";
+};
 
-}
-
-function IAmark(combination) {
+function marcarIA(combination) {
     let id = 0;
     combination.some((element) => {
-        if (cellElement(element) == undefined) id = element
-
-    })
-    setCellElement(id)
-
-
+        if (celulaMarcada(element) == undefined) id = element;
+    });
+    marcarCelula(id);
 }
 
-function IAcheck() {
+function verificarIA() {
     let aX = [];
     let aO = [];
-    let init = [];
-    let win = [];
-    let risk = [];
-    let trywin = [];
-    WINS_POSSIBLE.forEach((combination) => {
+    let iniciar = [];
+    let vencer = [];
+    let riscoDePerder = [];
+    let tentarVencer = [];
+    POSSIBILIDADE_VENCER.forEach((combination) => {
         let X = 0;
         let O = 0;
         combination.forEach((elements) => {
-
-            if (cellElement(elements) == 'X') X++;
-            if (cellElement(elements) == 'O') O++;
-
-        })
+            if (celulaMarcada(elements) == 'X') X++;
+            if (celulaMarcada(elements) == 'O') O++;
+        });
         aX.push(X);
         aO.push(O);
-
-    })
+    });
     aO.forEach((element, index) => {
         switch (element) {
             case 0:
                 if (aX[index] == 2) {
-                    risk.push(WINS_POSSIBLE[index])
+                    riscoDePerder.push(POSSIBILIDADE_VENCER[index]);
                 } else if (aX[index] == 1) {
-                    init.push(WINS_POSSIBLE[index])
+                    iniciar.push(POSSIBILIDADE_VENCER[index]);
                 }
                 break;
             case 1:
-                if (aX[index] == 0) trywin.push(WINS_POSSIBLE[index])
-                else if (aX[index] == 1) init.push(WINS_POSSIBLE[index])
+                if (aX[index] == 0) tentarVencer.push(POSSIBILIDADE_VENCER[index]);
+                else if (aX[index] == 1) iniciar.push(POSSIBILIDADE_VENCER[index]);
                 break;
-
             case 2:
                 if (aX[index] == 0) {
-                    win.push(WINS_POSSIBLE[index])
+                    vencer.push(POSSIBILIDADE_VENCER[index]);
                 }
                 break;
         }
+    });
 
-    })
-
-    if (win.length > 0) {
-        return IAcheckInit(win)
-    } else if (risk.length > 0) {
-        return IAcheckInit(risk)
-    } else if (trywin.length > 0) {
-        return IAcheckInit(trywin)
-    } else if (init.length > 0) IAcheckInit(init)
-
+    if (vencer.length > 0) {
+        return verificarIAIniciar(vencer);
+    } else if (riscoDePerder.length > 0) {
+        return verificarIAIniciar(riscoDePerder);
+    } else if (tentarVencer.length > 0) {
+        return verificarIAIniciar(tentarVencer);
+    } else if (iniciar.length > 0) verificarIAIniciar(iniciar);
 }
 
-function IAcheckInit(init) {
-    let numbers = []
-    init.forEach((element) => {
+function verificarIAIniciar(iniciar) {
+    let numbers = [];
+    iniciar.forEach((element) => {
         element.forEach((num, i) => {
-            if (cellElement(num) == undefined) {
-                numbers.push(num)
+            if (celulaMarcada(num) == undefined) {
+                numbers.push(num);
             }
         });
-    })
-    IArandomPlay(numbers)
+    });
+    IArandomPlay(numbers);
 }
 
 function IArandomPlay(combination) {
-    let idPlay = []
-    idPlay.push(combination[Math.floor(Math.random() * combination.length)])
-    IAmark(idPlay)
+    let idPlay = [];
+    idPlay.push(combination[Math.floor(Math.random() * combination.length)]);
+    marcarIA(idPlay);
 }
 
-
-activeIA();
-updateScore()
-init();
+ativarIA();
+atualizarPlacar();
+iniciar();
