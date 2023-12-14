@@ -2,7 +2,7 @@
 
 Aplicação do conhecimento de IA no projecto jogo da velha, avaliação da cadeira de Inteligência Artificial
 
-<img alt="jogo-inicio.png" src="https://github.com/RuiYuriAfricano/app-jogo-da-velha/tree/main/images/jogo-inicio.png?raw=true" data-hpc="true" class="Box-sc-g0xbh4-0 kzRgrI" width="400" height="400">
+![Jogo Início](https://github.com/RuiYuriAfricano/app-jogo-da-velha/raw/main/images/jogo-inicio.png)
 
 # Lógica aplicada
 
