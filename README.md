@@ -58,9 +58,9 @@ git clone https://github.com/RuiYuriAfricano/app-jogo-da-velha.git
 Pronto. Você terá a pasta deste projeto dentro da sua pasta criada. Agora é só abrir o arquivo index.html com o navegador e tentar ganhar.
 
 # Relatório
-<object data="https://github.com/RuiYuriAfricano/app-taxi-project/tree/main/docs/relatorio-labFinal.pdf" type="application/pdf" width="700px" height="700px">
-    <embed src="https://github.com/RuiYuriAfricano/app-taxi-project/tree/main/docs/relatorio-labFinal.pdf">
-        <p><a href="https://github.com/RuiYuriAfricano/app-taxi-project/tree/main/docs/relatorio-labFinal.pdf">Abrir Relatório</a>.</p>
+<object data="https://github.com/RuiYuriAfricano/app-jogo-da-velha/blob/main/docs/Relatorio_de_IA.pdf" type="application/pdf" width="700px" height="700px">
+    <embed src="https://github.com/RuiYuriAfricano/app-jogo-da-velha/blob/main/docs/Relatorio_de_IA.pdf">
+        <p><a href="https://github.com/RuiYuriAfricano/app-jogo-da-velha/blob/main/docs/Relatorio_de_IA.pdf">Abrir Relatório</a>.</p>
     </embed>
 </object>
 
