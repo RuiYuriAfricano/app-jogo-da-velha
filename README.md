@@ -1,16 +1,22 @@
 # app-jogo-da-velha
 
-Aplicação do conhecimento de IA no projecto jogo da velha, avaliação da cadeira de Inteligência Artificial
+Aplicação do conhecimento de IA no projeto do jogo da velha, uma avaliação da cadeira de Inteligência Artificial.
 
-![Jogo Início](https://github.com/RuiYuriAfricano/app-jogo-da-velha/raw/main/images/jogo-inicio.png)
+<p align="center">
+  <img alt="Jogo Início" src="https://github.com/RuiYuriAfricano/app-jogo-da-velha/raw/main/images/jogo-inicio.png" width="400" height="400">
+</p>
 
-# Lógica aplicada
+## Lógica aplicada
 
-'X' sempre inicia o game. Após a primeira jogada, o turno é invertido e então é a vez da 'BOLINHA' jogar. Somente depois de realizar uma jogada válida o sistema analisa se houve uma vitória, caso não tenha, inverte o turno e segue o jogo até alguém ganhar ou dar EMPATE!
+'X' sempre inicia o jogo. Após a primeira jogada, o turno é invertido, e então é a vez da 'BOLINHA' jogar. Somente depois de realizar uma jogada válida, o sistema analisa se houve uma vitória. Caso não tenha, inverte o turno e segue o jogo até alguém ganhar ou dar EMPATE!
 
-![Jogo Vitória](https://github.com/RuiYuriAfricano/app-jogo-da-velha/raw/main/images/jogo-vitoria.png)
+<p align="center">
+  <img alt="Jogo Vitória" src="https://github.com/RuiYuriAfricano/app-jogo-da-velha/raw/main/images/jogo-vitoria.png" width="400" height="400">
+</p>
 
-![Jogo Empate](https://github.com/RuiYuriAfricano/app-jogo-da-velha/raw/main/images/jogo-empate.png)
+<p align="center">
+  <img alt="Jogo Empate" src="https://github.com/RuiYuriAfricano/app-jogo-da-velha/raw/main/images/jogo-empate.png" width="400" height="400">
+</p>
 
 # GANHOU ou EMPATE
 
